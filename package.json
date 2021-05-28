@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://johnjm.github.io/",
-
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
@@ -17,7 +16,8 @@
     "react-slick": "^0.28.1",
     "slick-carousel": "^1.8.1",
     "typed.js": "^2.0.12",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -26,7 +26,6 @@
     "eject": "react-scripts eject",
     "predeploy": "yarm build",
     "deploy": "gh-pages -d build"
-
   },
   "eslintConfig": {
     "extends": [
