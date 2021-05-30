@@ -130,7 +130,7 @@ section#showcase {
 
 @media(max-width: 1410px){
 	section#showcase {
-		background-position: 58% -190px;
+		background-position: 58%;
 	}
 }
 @supports not (-webkit-overflow-scrolling: touch) {
