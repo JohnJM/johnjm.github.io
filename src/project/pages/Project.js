@@ -6,8 +6,6 @@ import {getProjects} from '../service';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Typed from 'typed.js';
-import $ from 'jquery';
 
 const sliderSettings = {
     dots: true,
@@ -16,17 +14,14 @@ const sliderSettings = {
     slidesToScrol: 1,
     autoplay: false,
     autoplaySpeed: 3000,
-    adaptiveHeight: true,
-    
+    adaptiveHeight: true
 };
 
 function siteFooter() {
-    var siteContent = $('#main');
-
-    var siteFooter = $('#footer');
-    var siteFooterHeight = siteFooter.height();
-
-    siteContent.css({"margin-bottom": siteFooterHeight});
+    const siteContent = document.getElementById('main');
+    const siteFooter = document.getElementById('footer');
+    const siteFooterHeight = siteFooter.offsetHeight;
+    siteContent.style.marginBottom = `${siteFooterHeight}px`;
 };
 
 const Project = () => {
@@ -79,14 +74,12 @@ const Project = () => {
                                         {value}
                                     </li>
                                 })
-                            }
+}
                         </ul>
 
                         {proj && proj.url
                             ? <a className="inputButton" href={proj.url}>View</a>
-                            : <button
-                                className="inputButton disable"
-                                href="#">Not Currently live</button>}
+                            : <button className="inputButton disable" href="#">Not Currently live</button>}
 
                         <NavLink className="inputButtonRed" to="/">Go back</NavLink>
                         <div className="LmarginBottom"></div>

@@ -1,9 +1,7 @@
 import {HashRouter as Router, Redirect, Route, Switch}  from 'react-router-dom';
 import Project from './project/pages/Project';
 import Home from './home/pages/Home';
-// import './style.css';
 import ScrollToTop from './ScrollToTop';
-
 
 function App() {
     return (

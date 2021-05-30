@@ -2,16 +2,15 @@ import React, {useEffect, useRef} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import Typed from 'typed.js';
-import $ from 'jquery';
 
 let typedOptions = {
     strings: [
-        ' reuseable front-end services', ' reactjs functional components ', ' single page web apps.', 'on node.js'
+        'on node.js', 'react.js functional components.', 'react.js custom hooks.', 'reuseable front-end services.', 'single page web apps.'
     ],
-    typeSpeed: 30,
-    backSpeed: 20,
+    typeSpeed: 40,
+    backSpeed: 30,
     loop: true,
-    backDelay: 2100,
+    backDelay: 1700,
     startDelay: 200
 }
 
@@ -21,42 +20,76 @@ const Home = () => {
     const portfolio = useRef();
     const contact = useRef();
 
+    function siteFooter() {
+        const siteContent = document.getElementById('main');
+        const siteFooter = document.getElementById('footer');
+        const siteFooterHeight = siteFooter.offsetHeight;
+        siteContent.style.marginBottom = `${siteFooterHeight}px`;
+    };
+
+    // sticky header
+    window.onscroll = function () {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > 20 && document.getElementsByClassName('header')[0]) {
+            document
+                .getElementsByClassName('header')[0]
+                .classList
+                .add('headerScroll2');
+        } else if (document.getElementsByClassName('header')[0]) {
+            document
+                .getElementsByClassName('header')[0]
+                .classList
+                .remove('headerScroll2');
+        }
+    };
+
     useEffect(() => {
+        // type effect on hero "i like building"
         let typed = new Typed(buildingEle.current, typedOptions);
         typed.start();
 
-        $('.basicSkillsBox').mouseover(function (e) {
-            $(this)
-                .find('img')
-                .addClass('hvr-buzz-out');
-        });
-        $('.basicSkillsBox').mouseleave(function (e) {
-            $(this)
-                .find('img')
-                .removeClass('hvr-buzz-out');
-        });
-        //shake animation on about me container
-        $('.aboutMeBox').mouseover(function (e) {
-            $('.JMIMG').addClass('hvr-buzz-out');
-        });
+        // dom shake on hover effects.
+        document
+            .querySelectorAll('.basicSkillsBox')
+            .forEach(box => {
+                box
+                    .addEventListener("mouseover", function () {
+                        box
+                            .querySelector('img')
+                            .classList
+                            .add('hvr-buzz-out');
+                    })
 
-        $('.aboutMeBox').mouseleave(function (e) {
-            $('.JMIMG').removeClass('hvr-buzz-out');
-        });
+                box.addEventListener("mouseleave", function () {
+                    box
+                        .querySelector('img')
+                        .classList
+                        .remove('hvr-buzz-out');
+                })
+            })
+
+        document
+            .querySelectorAll('.aboutMeBox')
+            .forEach(box => {
+                box
+                    .addEventListener("mouseover", function () {
+                        document
+                            .querySelector('.JMIMG')
+                            .classList
+                            .add('hvr-buzz-out');
+                    })
+
+                box.addEventListener("mouseleave", function () {
+                    document
+                        .querySelector('.JMIMG')
+                        .classList
+                        .remove('hvr-buzz-out');
+                })
+            })
+
     }, [])
 
-    function siteFooter() {
-        var siteContent = $('#main');
-        var siteContentHeight = siteContent.height();
-        var siteContentWidth = siteContent.width();
-
-        var siteFooter = $('#footer');
-        var siteFooterHeight = siteFooter.height();
-        var siteFooterWidth = siteFooter.width();
-
-        siteContent.css({"margin-bottom": siteFooterHeight});
-    };
-
+    // nav bar scroll effects
     const scrlAbout = () => about
         .current
         .scrollIntoView({behavior: 'smooth', block: 'start'});
@@ -128,15 +161,15 @@ const Home = () => {
                         <div className="basicSkillsBox">
                             <img className="skillIcon" src="img/dev.png" alt="dev"/>
                             <h4>Front-End Development</h4>
-                            <p>HTML, SCSS, JavaScript / ReactJS are what I spend most of my time
-                                working with. I also have experience developing with TypeScript.</p>
+                            <p>HTML, SCSS, JavaScript / React.js are what I spend most of my time working
+                                with. I also have experience developing with Angular / TypeScript.</p>
                         </div>
 
                         <div className="basicSkillsBox">
                             <img className="skillIcon" src="img/psd.png" alt="psd"/>
                             <h4>Design</h4>
-                            <p>Confident using Adobe Photoshop & Illustrator to create UX/UI conscious
-                                storyboards, icons. Some experience with general image editing.</p>
+                            <p>Confident using Adobe Photoshop for general image editing. Some experience
+                                creating UX/UI conscious webpage storyboards / styleguides</p>
                         </div>
 
                         <div className="basicSkillsBox">
@@ -153,23 +186,16 @@ const Home = () => {
                 <div ref={portfolio}></div>
                 <div className="container">
                     <h1 className="underlineBlue mainHeaderText">Projects</h1>
-                    <h4 className="mainSubHeader">Watch this space, there's more coming soon!
-                        {/* <a href="https://github.com/MorleyWebDev/lastfm-api-angular">
-                            soon</a> */}
-                    </h4>
+                    <h4 className="mainSubHeader">Watch this space, there's more coming soon!</h4>
 
                     <div className="portfolioContainer">
 
                         <div className="portfolioBox">
-                        <img
-                                src="img/jmgit.png"
-                                className="leftPortfolioImg"
-                                id="git"
-                                alt="github"/>
+                            <img src="img/jmgit.png" className="leftPortfolioImg" id="git" alt="github"/>
                             <div className="portfolioTextBox">
                                 <h4>2020+ Projects</h4>
                                 <p className="thinText">More recently I've been working on a full stack MERN
-                                    forum, advent of code 2020, an Angular 7 project & more.</p>
+                                    forum, advent of code 2020, an Angular project & more.</p>
                                 <a className="inputButton" href="https://github.com/JohnJM">My Github</a>
                             </div>
                         </div>
@@ -267,7 +293,8 @@ const Home = () => {
                                     programming and web development knowledge further. I started a HND in web
                                     development at the City of Glasgow college, where I managed to get an 'A' grade
                                     for both years. I then completed a BSc in Web & Mobile Development.</p>
-                                <p className="thinText LmarginBottom">After graduating, I started working as a Web Developer full time. I also do some freelance web dev work.</p>
+                                <p className="thinText LmarginBottom">After graduating, I started working as a
+                                    Web Developer full time. I also do some freelance web dev work.</p>
                             </div>
                         </div>
                     </div>
